@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iot_clock/Constants/variables.dart';
 
 ValueNotifier <bool> startTimer = ValueNotifier(false);
 Stopwatch timer = Stopwatch();
@@ -7,11 +8,9 @@ var cherckerTimer;
 
 void reachedLimit(){
   if (timerDuration.compareTo(timer.elapsed) <= 0 && startTimer.value == true) {
-    print('************* reached limit ************');
     resetTimer();
     turnOnSound();
   }
-  print('waiting');
 }
 
 void resetTimer() {
@@ -21,8 +20,4 @@ void resetTimer() {
   timer.stop();
   timer.reset();
   cherckerTimer.cancel();
-}
-
-void turnOnSound() {
-  //todo: turn on sound
 }

@@ -29,7 +29,7 @@ class StopwatchClock extends StatelessWidget {
                 TextSpan(
                   children: [
                     TextSpan(
-                      text: '${stopwatch.elapsedMilliseconds ~/ 6000}'.padLeft(2, '0'),
+                      text: '${stopwatch.elapsedMilliseconds ~/ 60000}'.padLeft(2, '0'),
                     ),
                     TextSpan(
                       text: ' ${'${stopwatch.elapsedMilliseconds ~/ 1000 % 60}'.padLeft(2, '0')}',

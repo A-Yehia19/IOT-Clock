@@ -20,7 +20,7 @@ class TimerPage extends StatelessWidget {
                   Positioned(
                     left: 17.w,
                     top: 64.h,
-                    child: Text('Stopwatch', style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),),
+                    child: Text('Timer', style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),),
                   ),
                   const Center(child: TimerClock()),
                   const Positioned(

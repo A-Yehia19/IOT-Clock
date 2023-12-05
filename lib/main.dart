@@ -4,6 +4,7 @@ import 'package:iot_clock/Constants/Colors.dart';
 import 'package:iot_clock/Home.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 

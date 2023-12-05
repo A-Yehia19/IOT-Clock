@@ -66,9 +66,11 @@ class TimerClock extends StatelessWidget {
 }
 
 openPicker(context) async {
+  final hours = timerDuration.inHours;
+  final minutes = timerDuration.inMinutes % 60;
   TimeOfDay? selectedTime = await showTimePicker(
     context: context,
-    initialTime: const TimeOfDay(hour: 10, minute: 47),
+    initialTime: TimeOfDay(hour: hours, minute: minutes),
     initialEntryMode: TimePickerEntryMode.input,
     helpText: 'Select timer duration',
     builder: (BuildContext context, Widget? child) {
