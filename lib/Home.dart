@@ -6,7 +6,6 @@ import 'package:iot_clock/Alarms/Data/variables.dart';
 import 'package:iot_clock/Constants/variables.dart';
 import 'package:iot_clock/MQTT%20modules/Mqtt%20Connect.dart';
 import 'package:iot_clock/MQTT%20modules/Publish%20Message.dart';
-import 'package:iot_clock/Settings/settings.dart';
 import 'package:iot_clock/Stopwatch/stopwatch.dart';
 import 'package:iot_clock/Timer/timer.dart';
 
@@ -53,7 +52,6 @@ class _HomeState extends State<Home> {
       const Alarms(),
       const TimerPage(),
       const StopWatch(),
-      const Settings(),
     ];
 
     final controller = PageController(
@@ -63,8 +61,8 @@ class _HomeState extends State<Home> {
 
     return Scaffold(
       body: PageView(
-        onPageChanged: (value) => setState(() => currentPage = value),
         controller: controller,
+        onPageChanged: (value) => setState(() => currentPage = value),
         children: pages,
       ),
       bottomNavigationBar: BottomNavigationBar(

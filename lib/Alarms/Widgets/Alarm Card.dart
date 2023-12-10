@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:iot_clock/Alarms/Data/Alarm%20Class.dart';
 import 'package:iot_clock/Alarms/Data/Functions.dart';
-import 'package:lite_rolling_switch/lite_rolling_switch.dart';
-
-import '../../Constants/Colors.dart';
-import '../Data/Alarm Class.dart';
+import 'package:iot_clock/Constants/Colors.dart';
 
 class AlarmCard extends StatelessWidget {
   final Alarm alarm;
@@ -70,10 +68,7 @@ class AlarmCard extends StatelessWidget {
             top: 0,
             right: 0,
             child: IconButton(
-              onPressed: () {
-                alarm.delete();
-                sortAndSend();
-              },
+              onPressed: () => alarm.delete(),
               icon: const Icon(Icons.delete),
               color: textColorDisabled,
             ),
@@ -81,21 +76,13 @@ class AlarmCard extends StatelessWidget {
           Positioned(
             bottom: 0,
             right: 0,
-            child: SizedBox(
-              height: 50.h,
-              child: LiteRollingSwitch(
-                width: 100.w,
-                value: alarm.isOn,
-                iconOn: Icons.alarm_rounded,
-                iconOff: Icons.alarm_off_rounded,
-                colorOn: const Color(0xFFCCE5FF),
-                colorOff: const Color(0xFF42474E),
-                textSize: 15.sp,
-                onChanged: (bool state) => alarm.toggle(),
-                onTap: () => sortAndSend(),
-                onDoubleTap: ()=> null,
-                onSwipe: ()=> null,
-              ),
+            child: Switch(
+              value: alarm.isOn,
+              onChanged: (bool state) => alarm.toggle(),
+              activeColor: textColor,
+              activeTrackColor: secondaryColor.withOpacity(0.7),
+              inactiveThumbColor: textColorDisabled,
+              inactiveTrackColor: textColorDisabled.withOpacity(0.5),
             ),
           ),
         ]

@@ -17,11 +17,11 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_mqtt: ^1.0.0+5
   flutter_screenutil: ^5.9.0
-  lite_rolling_switch: ^1.0.1
   page_animation_transition: ^1.0.0
   day_night_time_picker: ^1.3.0+1
   just_audio: ^0.9.36
   mqtt_client: ^10.0.0
+  flutter_native_splash: ^2.3.8
 
 dev_dependencies:
   flutter_test:
@@ -35,6 +35,7 @@ flutter:
   assets:
     - Assets/Sounds/
     - Assets/Certificates/
+    - Assets/Images/
 
   fonts:
     - family: Rubik
