@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:iot_clock/Alarms/Data/Functions.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 
 import '../../Constants/Colors.dart';
@@ -69,7 +70,10 @@ class AlarmCard extends StatelessWidget {
             top: 0,
             right: 0,
             child: IconButton(
-              onPressed: () => alarm.delete(),
+              onPressed: () {
+                alarm.delete();
+                sortAndSend();
+              },
               icon: const Icon(Icons.delete),
               color: textColorDisabled,
             ),
@@ -88,7 +92,7 @@ class AlarmCard extends StatelessWidget {
                 colorOff: const Color(0xFF42474E),
                 textSize: 15.sp,
                 onChanged: (bool state) => alarm.toggle(),
-                onTap: () => null,
+                onTap: () => sortAndSend(),
                 onDoubleTap: ()=> null,
                 onSwipe: ()=> null,
               ),

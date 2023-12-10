@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iot_clock/Constants/Colors.dart';
+import 'package:iot_clock/Constants/variables.dart';
+import 'package:iot_clock/MQTT%20modules/Publish%20Message.dart';
 import 'package:iot_clock/Timer/Data/variables.dart';
 
 class DeleteButton extends StatelessWidget {
@@ -11,12 +13,12 @@ class DeleteButton extends StatelessWidget {
     return ValueListenableBuilder(
       valueListenable: startTimer,
       builder: (context, value, child) => AnimatedOpacity(
-        opacity: startTimer.value ? 1 : 0,
+        opacity: timer.elapsedMilliseconds > 0 ? 1 : 0,
         duration: const Duration(milliseconds: 500),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 500),
           curve: Curves.easeInOut,
-          transform: Matrix4.translationValues(0, startTimer.value ? 0 : 100.h, 0),
+          transform: Matrix4.translationValues(0, timer.elapsedMilliseconds > 0 ? 0 : 100.h, 0),
           child: child,
         ),
       ),
@@ -36,7 +38,7 @@ class DeleteButton extends StatelessWidget {
           ],
         ),
         child: IconButton(
-          onPressed: resetTimer,
+          onPressed: () => publishMessage(timerTopic, 'r'),
           icon: Icon(Icons.delete_outline, color: Colors.black, size: 30.sp),
         ),
       ),

@@ -1,8 +1,8 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iot_clock/Constants/Colors.dart';
+import 'package:iot_clock/Constants/variables.dart';
+import 'package:iot_clock/MQTT%20modules/Publish%20Message.dart';
 import 'package:iot_clock/Timer/Data/variables.dart';
 
 class PlayTimer extends StatelessWidget {
@@ -37,12 +37,11 @@ class PlayTimer extends StatelessWidget {
 }
 
 start() {
-  startTimer.value = !startTimer.value;
   if (startTimer.value) {
-    timer.start();
-    cherckerTimer = Timer.periodic(const Duration(seconds: 1), (timer) => reachedLimit(),);
+    // pause if it running
+    publishMessage(timerTopic, 'p');
   }else{
-    timer.stop();
-    cherckerTimer.cancel();
+    // run if it paused
+    publishMessage(timerTopic, 's');
   }
 }

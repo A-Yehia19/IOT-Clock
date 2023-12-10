@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iot_clock/Constants/Colors.dart';
+import 'package:iot_clock/Constants/variables.dart';
+import 'package:iot_clock/MQTT%20modules/Publish%20Message.dart';
 import 'package:iot_clock/Timer/Data/variables.dart';
 
 class TimerClock extends StatelessWidget {
@@ -91,5 +93,9 @@ openPicker(context) async {
 
   if (selectedTime != null){
     timerDuration = Duration(hours: selectedTime.hour, minutes: selectedTime.minute);
+
+    // publish the new timer duration
+    final msg = timerDuration.inMilliseconds.toString();
+    publishMessage(timerTopic, msg);
   }
 }

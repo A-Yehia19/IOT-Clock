@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iot_clock/Constants/Colors.dart';
+import 'package:iot_clock/Constants/variables.dart';
+import 'package:iot_clock/MQTT%20modules/Publish%20Message.dart';
 import 'package:iot_clock/Stopwatch/Data/variables.dart';
 
 class PlayButton extends StatelessWidget {
@@ -35,11 +37,11 @@ class PlayButton extends StatelessWidget {
 }
 
 start() {
-  startStopwatch.value = !startStopwatch.value;
   if (startStopwatch.value) {
-    stopwatch.start();
+    // pause if it running
+    publishMessage(stopwatchTopic, 'p');
   }else{
-    stopwatch.stop();
+    // run if it paused
+    publishMessage(stopwatchTopic, 's');
   }
-  print('${startStopwatch.value} ${stopwatch.elapsedMilliseconds}');
 }

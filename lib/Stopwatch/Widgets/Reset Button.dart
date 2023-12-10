@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iot_clock/Constants/Colors.dart';
+import 'package:iot_clock/Constants/variables.dart';
+import 'package:iot_clock/MQTT%20modules/Publish%20Message.dart';
 import 'package:iot_clock/Stopwatch/Data/variables.dart';
 
 class ResetButton extends StatelessWidget {
@@ -11,12 +13,12 @@ class ResetButton extends StatelessWidget {
     return ValueListenableBuilder(
       valueListenable: startStopwatch,
       builder: (context, value, child) => AnimatedOpacity(
-        opacity: startStopwatch.value || stopwatch.elapsedMicroseconds != 0  ? 1 : 0,
+        opacity: stopwatch.elapsedMicroseconds > 0  ? 1 : 0,
         duration: const Duration(milliseconds: 500),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 500),
           curve: Curves.easeInOut,
-          transform: Matrix4.translationValues(0, stopwatch.elapsedMicroseconds != 0 ? 0 : 100.h, 0),
+          transform: Matrix4.translationValues(0, stopwatch.elapsedMicroseconds > 0 ? 0 : 100.h, 0),
           child: child,
         ),
       ),
@@ -45,10 +47,5 @@ class ResetButton extends StatelessWidget {
 }
 
 resetStopwatch() {
-  stopwatch.stop();
-  stopwatch.reset();
-  startStopwatch.value = false;
-  startStopwatch.value = true;
-  startStopwatch.value = false;
-  print('${startStopwatch.value} ${stopwatch.elapsedMilliseconds}');
+  publishMessage(stopwatchTopic, 'r');
 }

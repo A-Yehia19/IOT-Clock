@@ -21,6 +21,7 @@ dependencies:
   page_animation_transition: ^1.0.0
   day_night_time_picker: ^1.3.0+1
   just_audio: ^0.9.36
+  mqtt_client: ^10.0.0
 
 dev_dependencies:
   flutter_test:
@@ -33,6 +34,7 @@ flutter:
 
   assets:
     - Assets/Sounds/
+    - Assets/Certificates/
 
   fonts:
     - family: Rubik

@@ -1,6 +1,7 @@
 import 'package:day_night_time_picker/lib/state/time.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:iot_clock/Alarms/Data/Functions.dart';
 import 'package:iot_clock/Alarms/Data/variables.dart';
 import 'package:iot_clock/Constants/Colors.dart';
 
@@ -48,5 +49,6 @@ confirmAlarm(context) {
   alarmNameController.clear();
   Navigator.pop(context);
   alarmsList[0].notify();
-  alarmsList.sort((a, b) => a.time.compareTo(b.time));
+
+  sortAndSend();
 }
