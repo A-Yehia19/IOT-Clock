@@ -1,3 +1,4 @@
+import 'package:iot_clock/Alarms/Data/Functions.dart';
 import 'package:iot_clock/Alarms/Data/variables.dart';
 
 class Alarm{
@@ -13,11 +14,13 @@ class Alarm{
 
   void delete(){
     alarmsList.remove(this);
+    sortAndSend();
     notify();
   }
 
   void toggle(){
     isOn = !isOn;
+    sortAndSend();
     notify();
   }
 

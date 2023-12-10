@@ -1,9 +1,24 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:iot_clock/Alarms/Alarms.dart';
+import 'package:iot_clock/Alarms/Data/variables.dart';
+import 'package:iot_clock/Constants/variables.dart';
 import 'package:iot_clock/MQTT%20modules/Mqtt%20Connect.dart';
+import 'package:iot_clock/MQTT%20modules/Publish%20Message.dart';
 import 'package:iot_clock/Settings/settings.dart';
 import 'package:iot_clock/Stopwatch/stopwatch.dart';
 import 'package:iot_clock/Timer/timer.dart';
+
+Timer alarmTimeChecker = Timer.periodic(const Duration(seconds: 1), (timer) {
+  if (alarmsList.isNotEmpty && alarmsList[0].isOn) {
+    if (alarmsList[0].time.isBefore(DateTime.now())) {
+      turnOnSound();
+      publishMessage(alarmTopic, 'r');
+      alarmsList[0].delete();
+    }
+  }
+});
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -17,6 +32,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     mqttConnect();
+    print(alarmTimeChecker.isActive);
 
     super.initState();
   }
@@ -24,6 +40,7 @@ class _HomeState extends State<Home> {
   @override
   void dispose() {
    client.disconnect();
+   alarmTimeChecker.cancel();
 
     super.dispose();
   }
@@ -39,8 +56,17 @@ class _HomeState extends State<Home> {
       const Settings(),
     ];
 
+    final controller = PageController(
+      initialPage: currentPage,
+      keepPage: true,
+    );
+
     return Scaffold(
-      body: pages[currentPage],
+      body: PageView(
+        onPageChanged: (value) => setState(() => currentPage = value),
+        controller: controller,
+        children: pages,
+      ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: const Color(0xFF232A30),
         selectedItemColor: Colors.white.withOpacity(0.85),
@@ -49,7 +75,7 @@ class _HomeState extends State<Home> {
         selectedIconTheme: const IconThemeData(size: 35),
         selectedFontSize: 16,
         currentIndex: currentPage,
-        onTap: (value) => setState(() => currentPage = value),
+        onTap: (value) => setState(() => controller.animateToPage(value, duration: const Duration(milliseconds: 600), curve: Curves.easeInOut)),
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.alarm),

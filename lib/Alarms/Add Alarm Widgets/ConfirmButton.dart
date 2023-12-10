@@ -38,6 +38,13 @@ confirmAlarm(context) {
     time.value.hour,
     time.value.minute,
   );
+
+  if (finalTime.isBefore(DateTime.now())) {
+    var snackBar = const SnackBar(content: Text('Alarm time is in the past!, please choose a time in the future :)'));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    return;
+  }
+
   Alarm newAlarm = Alarm(
     isOn: true,
     name: alarmNameController.text,

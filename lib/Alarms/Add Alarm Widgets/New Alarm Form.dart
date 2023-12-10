@@ -73,7 +73,7 @@ class NewAlarmForm extends StatelessWidget {
               child: ValueListenableBuilder(
                 valueListenable: time,
                 builder: (context, value, child) => Text(
-                  "${time.value.hour}:${time.value.minute}",
+                  "${time.value.hour.toString().padLeft(2, '0')}:${time.value.minute.toString().padLeft(2, '0')}",
                   style: TextStyle(fontSize: 25.sp, fontWeight: FontWeight.w500, color: primaryColor),
                 ),
               ),
