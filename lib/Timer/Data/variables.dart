@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iot_clock/Constants/variables.dart';
+import 'package:iot_clock/MQTT%20modules/Publish%20Message.dart';
 
 ValueNotifier <bool> startTimer = ValueNotifier(false);
 Stopwatch timer = Stopwatch();
@@ -8,8 +9,7 @@ var cherckerTimer;
 
 void reachedLimit(){
   if (timerDuration.compareTo(timer.elapsed) <= 0 && startTimer.value == true) {
-    resetTimer();
-    turnOnSound();
+    publishMessage(timerTopic, 'c');
   }
 }
 

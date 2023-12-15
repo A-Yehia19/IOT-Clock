@@ -4,7 +4,7 @@ const alarmTopic = 'ALARM';
 const timerTopic = 'TIMER';
 const stopwatchTopic = 'STOPWATCH';
 
-const alarmMusic = 'Assets/Sounds/alarm_short.mp3';
+const alarmMusic = 'Assets/Sounds/alarm.wav';
 
 turnOnSound() async {
   final player1 = AudioPlayer();

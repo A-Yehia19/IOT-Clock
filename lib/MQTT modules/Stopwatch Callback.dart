@@ -8,13 +8,13 @@ stopwatchCallback(msg) {
   // start stopwatch
   if(msg == 's'){
     stopwatch.start();
-    startStopwatch.value = !startStopwatch.value;
+    startStopwatch.value = true;
   }
 
   // pause stopwatch
   else if(msg == 'p'){
     stopwatch.stop();
-    startStopwatch.value = !startStopwatch.value;
+    startStopwatch.value = false;
   }
 
   // reset stopwatch

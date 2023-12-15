@@ -42,6 +42,10 @@ start() {
     publishMessage(timerTopic, 'p');
   }else{
     // run if it paused
-    publishMessage(timerTopic, 's');
+
+    // publish the new timer duration
+    final remainingTime = timerDuration.inMilliseconds - timer.elapsedMilliseconds;
+    final msg = remainingTime.toString();
+    publishMessage(timerTopic, msg);
   }
 }

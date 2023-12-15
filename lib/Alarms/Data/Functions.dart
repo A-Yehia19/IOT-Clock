@@ -14,7 +14,7 @@ sortAndSend() {
   } else {
     final hours = alarmsList[0].time.hour.toString().padLeft(2, '0');
     final minutes = alarmsList[0].time.minute.toString().padLeft(2, '0');
-    msg = 'Alarm set at = $hours:$minutes';
+    msg = ' Alarm set at $hours:$minutes ';
   }
   publishMessage(alarmTopic, msg);
 }
